@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Orientamento - Liceo delle Scienze Umane</title>
+    <style>
+        :root {
+            --primary: #4a90e2;
+            --secondary: #f39c12;
+            --bg: #f4f7f6;
+            --text: #333;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 { color: var(--primary); font-size: 1.5rem; }
+        p.intro { font-style: italic; color: #666; }
+
+        .question {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .question p {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            background: #f9f9f9;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        label:hover { background: #eef2f7; }
+
+        input[type="radio"] { margin-right: 10px; }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover { background: #357abd; }
+
+        /* Pagina Risultati */
+        #result-page {
+            display: none;
+            text-align: center;
+        }
+
+        .profile-box {
+            background: #eef2f7;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .motivation {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            font-weight: bold;
+            margin: 20px 0;
+            font-style: italic;
+        }
+
+        .qr-section {
+            margin-top: 30px;
+            border-top: 2px dashed #ccc;
+            padding-top: 20px;
+        }
+
+        #qrcode img {
+            margin: 0 auto;
+        }
+
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+<div class="container" id="quiz-page">
+    <header>
+        <h1>Scopri se il Liceo delle Scienze Umane fa per te</h1>
+        <p class="intro">Immagina di candidarti per il "lavoro" di studente del Liceo delle Scienze Umane.</p>
+    </header>
+
+    <form id="quizForm">
+        <div class="question">
+            <p>1. Quando lavori in gruppo, di solito tu...</p>
+            <label><input type="radio" name="q1" value="A" required> Preferisci ascoltare e capire il punto di vista degli altri</label>
+            <label><input type="radio" name="q1" value="B"> Ti concentri solo sul risultato finale</label>
+            <label><input type="radio" name="q1" value="C"> Ti annoi facilmente</label>
+            <label><input type="radio" name="q1" value="D"> Preferisci lavorare sempre da solo</label>
+        </div>
+
+        <div class="question">
+            <p>2. Quale di queste materie ti incuriosisce di più?</p>
+            <label><input type="radio" name="q2" value="A" required> Psicologia e comportamento umano</label>
+            <label><input type="radio" name="q2" value="B"> Storia e società</label>
+            <label><input type="radio" name="q2" value="C"> Scienze motorie</label>
+            <label><input type="radio" name="q2" value="D"> Tecnologia e informatica</label>
+        </div>
+
+        <div class="question">
+            <p>3. Se un tuo compagno è in difficoltà, tu cosa fai più spesso?</p>
+            <label><input type="radio" name="q3" value="A" required> Cerchi di capirne il problema e aiutarlo</label>
+            <label><input type="radio" name="q3" value="B"> Lo segnali subito all'insegnante</label>
+            <label><input type="radio" name="q3" value="C"> Preferisci non intervenire</label>
+            <label><input type="radio" name="q3" value="D"> Cambi argomento</label>
+        </div>
+
+        <div class="question">
+            <p>4. Ti piace riflettere su domande come "perché le persone si comportano così?"</p>
+            <label><input type="radio" name="q4" value="A" required> Molto</label>
+            <label><input type="radio" name="q4" value="B"> Abbastanza</label>
+            <label><input type="radio" name="q4" value="C"> Poco</label>
+            <label><input type="radio" name="q4" value="D"> Per niente</label>
+        </div>
+
+        <div class="question">
+            <p>5. In una giornata di scuola ideale, ti piacerebbe soprattutto...</p>
+            <label><input type="radio" name="q5" value="A" required> Discutere, confrontarti e capire meglio te stesso e gli altri</label>
+            <label><input type="radio" name="q5" value="B"> Fare solo esercizi pratici</label>
+            <label><input type="radio" name="q5" value="C"> Studiare materie scientifiche</label>
+            <label><input type="radio" name="q5" value="D"> Avere poche ore di lezione</label>
+        </div>
+
+        <div class="question">
+            <p>6. Quanto ti riconosci in questa frase? "Mi interessa capire come funziona la società..."</p>
+            <label><input type="radio" name="q6" value="A" required> Moltissimo</label>
+            <label><input type="radio" name="q6" value="B"> Abbastanza</label>
+            <label><input type="radio" name="q6" value="C"> Poco</label>
+            <label><input type="radio" name="q6" value="D"> Per niente</label>
+        </div>
+
+        <button type="button" onclick="calculateResult()">Vedi il mio profilo</button>
+    </form>
+</div>
+
+<div class="container" id="result-page">
+    <h1>Il tuo Profilo</h1>
+    <div id="profile-content" class="profile-box"></div>
+    
+    <div class="motivation" id="motivation-text"></div>
+
+    <div class="qr-section">
+        <p>Condividi questo quiz con i tuoi amici!</p>
+        <div id="qrcode"></div>
+    </div>
+    
+    <button onclick="location.reload()" style="margin-top: 20px; background: #666;">Rifai il quiz</button>
+</div>
+
+<script>
+    function calculateResult() {
+        const form = document.getElementById('quizForm');
+        const formData = new FormData(form);
+        const counts = { A: 0, B: 0, C: 0, D: 0 };
+        let answered = 0;
+
+        for (let value of formData.values()) {
+            counts[value]++;
+            answered++;
+        }
+
+        if (answered < 6) {
+            alert("Per favore, rispondi a tutte le domande!");
+            return;
+        }
+
+        // Trova la lettera con il valore massimo
+        const winner = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
+
+        const results = {
+            'A': `<h3>Profilo Scienze Umane - Molto indicato</h3>
+                  <ul>
+                    <li>Forte interesse per le relazioni, le persone e i contesti sociali</li>
+                    <li>Curiosità verso psicologia, educazione e dinamiche di gruppo</li>
+                    <li>Buona predisposizione all'ascolto e al confronto</li>
+                  </ul>
+                  <p><strong>Il Liceo delle Scienze Umane è altamente consigliato!</strong></p>`,
+            'B': `<h3>Profilo Scienze Umane - Compatibile</h3>
+                  <ul>
+                    <li>Interesse per le scienze sociali e umanistiche</li>
+                    <li>Buona capacità di organizzazione e riflessione</li>
+                    <li>Potenziale da sviluppare nelle discipline psico-sociali</li>
+                  </ul>
+                  <p><strong>Il Liceo delle Scienze Umane è una scelta possibile.</strong></p>`,
+            'C': `<h3>Profilo Pratico-Operativo</h3>
+                  <ul>
+                    <li>Preferenza per attività concrete e meno riflessive</li>
+                    <li>Interesse limitato per l'analisi dei comportamenti e della società</li>
+                  </ul>
+                  <p><strong>Valutare con attenzione la scelta del Liceo delle Scienze Umane.</strong></p>`,
+            'D': `<h3>Profilo Poco Affine</h3>
+                  <ul>
+                    <li>Scarso interesse per le relazioni, la riflessione e le scienze umane</li>
+                    <li>Maggiore orientamento verso altri indirizzi</li>
+                  </ul>
+                  <p><strong>Potrebbero esserci altri percorsi più adatti alle tue inclinazioni.</strong></p>`
+        };
+
+        const motivations = [
+            "“Conosci te stesso, e diventerai ciò che sei.”",
+            "“L'educazione è l'arma più potente che si possa usare per cambiare il mondo.”",
+            "“Non si può mai attraversare l'oceano se non si ha il coraggio di perdere di vista la riva.”",
+            "“Il futuro appartiene a coloro che credono nella bellezza dei propri sogni.”"
+        ];
+
+        // Mostra i risultati
+        document.getElementById('quiz-page').style.display = 'none';
+        document.getElementById('result-page').style.display = 'block';
+        document.getElementById('profile-content').innerHTML = results[winner];
+        document.getElementById('motivation-text').innerText = motivations[Math.floor(Math.random() * motivations.length)];
+
+        // Genera QR Code (usa l'URL corrente)
+        const currentUrl = window.location.href;
+        document.getElementById('qrcode').innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(currentUrl)}" alt="QR Code">`;
+    }
+</script>
+
+</body>
+</html>
